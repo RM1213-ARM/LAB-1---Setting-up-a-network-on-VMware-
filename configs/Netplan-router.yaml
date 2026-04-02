@@ -1,0 +1,13 @@
+## Netplan config on Router VM ##
+
+network:
+  version: 2
+  ethernets:
+    enp2s0:
+      dhcp4: true
+    enp3s0:
+      addresses:
+        - 192.168.10.1/24
+    enp26s0:
+      addresses:
+        - 192.168.20.1/24
