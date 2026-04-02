@@ -5,7 +5,7 @@ The following tests were conducted to verify the integrity of the inter-subnet r
 
 ## 1. Connectivity & Routing (ICMP)
 
-* Test: Send 4 ICMP echo requests (Ping) from Management to Server.
+Test: Send 4 ICMP echo requests (Ping) from Management to Server.
 
 * Command: ping -c 4 192.168.20.10
 
@@ -17,7 +17,7 @@ Technical Note: Confirmed that the router is correctly forwarding packets betwee
 
 ## 2. Service Access (HTTP/HTTPS)
 
-* Test: Verify web access from Management Subnet to the DMZ Server.
+Test: Verify web access from Management Subnet to the DMZ Server.
 
 * Command: curl -I http://192.168.20.10
 
@@ -29,7 +29,7 @@ Technical Note: The stateful inspection rule (ESTABLISHED,RELATED) successfully 
 
 ## 3. Security Enforcement (Default Deny)
 
-* Test: Attempt to connect via an unauthorized protocol (Telnet - Port 23).
+Test: Attempt to connect via an unauthorized protocol (Telnet - Port 23).
 
 * Command: telnet 192.168.20.10 23
 
@@ -43,11 +43,11 @@ kernel: [FW_REJECT: ] IN=enp3s0 OUT=enp26s0 SRC=192.168.10.10 DST=192.168.20.10 
 
 ## 4. Unidirectional SSH (Lateral Movement Prevention)
 
-* Test A (Admin Access): SSH from Management to Server.
+Test A (Admin Access): SSH from Management to Server.
 
 * Result: PASS (Login successful).
 
-* Test B (Security Constraint): SSH from Server back to Management.
+Test B (Security Constraint): SSH from Server back to Management.
 
 * Result: PASS (BLOCKED) (Connection timeout).
 
