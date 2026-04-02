@@ -1,11 +1,11 @@
 # Project Verification & Testing Log
 
 ## Overview
-The following tests were conducted to verify the integrity of the inter-subnet routing and the enforcement of the stateful firewall policy. Testing was performed between the Client VM (192.168.10.10) and the Web Server VM (192.168.20.10) via the Linux Router.
+The following tests were conducted to verify the integrity of the inter-subnet routing and the enforcement of the stateful firewall policy. Testing was performed between the Management VM (192.168.10.10) and the Web Server VM (192.168.20.10) via the Linux Router.
 
 ## 1. Connectivity & Routing (ICMP)
 
-* Test: Send 4 ICMP echo requests (Ping) from Client to Server.
+* Test: Send 4 ICMP echo requests (Ping) from Management to Server.
 
 * Command: ping -c 4 192.168.20.10
 
@@ -17,7 +17,7 @@ Technical Note: Confirmed that the router is correctly forwarding packets betwee
 
 ## 2. Service Access (HTTP/HTTPS)
 
-* Test: Verify web access from Client Subnet to the DMZ Server.
+* Test: Verify web access from Management Subnet to the DMZ Server.
 
 * Command: curl -I http://192.168.20.10
 
@@ -25,7 +25,7 @@ Technical Note: Confirmed that the router is correctly forwarding packets betwee
 
 * Actual Result: PASS
 
-Technical Note: The stateful inspection rule (ESTABLISHED,RELATED) successfully allowed the server's HTTP response to pass back to the client without needing a manual return rule.
+Technical Note: The stateful inspection rule (ESTABLISHED,RELATED) successfully allowed the server's HTTP response to pass back to the Management without needing a manual return rule.
 
 ## 3. Security Enforcement (Default Deny)
 
@@ -43,11 +43,11 @@ kernel: [FW_REJECT: ] IN=enp3s0 OUT=enp26s0 SRC=192.168.10.10 DST=192.168.20.10 
 
 ## 4. Unidirectional SSH (Lateral Movement Prevention)
 
-* Test A (Admin Access): SSH from Client to Server.
+* Test A (Admin Access): SSH from Management to Server.
 
 * Result: PASS (Login successful).
 
-* Test B (Security Constraint): SSH from Server back to Client.
+* Test B (Security Constraint): SSH from Server back to Management.
 
 * Result: SUCCESS (BLOCKED) (Connection timeout).
 
