@@ -35,7 +35,7 @@ Technical Note: The stateful inspection rule (ESTABLISHED,RELATED) successfully 
 
 * Expected Result: Connection timeout; packet dropped by firewall.
 
-* Actual Result: 🛡️ SUCCESS (BLOCKED)
+* Actual Result: PASS (BLOCKED)
 
 * Log Evidence: Verified in /var/log/syslog on the Router:
 
@@ -49,7 +49,7 @@ kernel: [FW_REJECT: ] IN=enp3s0 OUT=enp26s0 SRC=192.168.10.10 DST=192.168.20.10 
 
 * Test B (Security Constraint): SSH from Server back to Management.
 
-* Result: SUCCESS (BLOCKED) (Connection timeout).
+* Result: PASS (BLOCKED) (Connection timeout).
 
 Conclusion: The management plane is isolated. A compromised Web Server cannot initiate an SSH session back into the internal management subnet.
 
@@ -57,4 +57,4 @@ Conclusion: The management plane is isolated. A compromised Web Server cannot in
 
 Mechanism: Interface-to-Subnet Binding.
 
-Analysis: While a live spoofing attack was not simulated, the firewall script contains strict -i (input interface) and -s (source IP) pairings. By requiring Subnet A traffic to arrive exclusively via enp3s0, the configuration mathematically prevents an attacker on the Server interface (enp26s0) from successfully routing packets that claim to be from the Client network.
+Analysis: Although a live spoofing attack was not simulated, the firewall script contains strict -i (input interface) and -s (source IP) pairings. By requiring Subnet A traffic to arrive exclusively via enp3s0, the configuration mathematically prevents an attacker on the Server interface (enp26s0) from successfully routing packets that claim to be from the Client network.
