@@ -3,7 +3,7 @@
 network:
   version: 2
   ethernets:
-    enp02s0
+    enp02s0:
       dhcp4: false
       addresses:
         - 192.168.20.10/24
